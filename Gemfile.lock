@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    beacnox (0.1.0)
+    beacnox (1.0.0)
       browser
       railties
       redis
