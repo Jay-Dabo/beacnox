@@ -1,0 +1,52 @@
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <%= link_to beacnox.beacnox_url, class: "navbar-item logo" do %>
+      <h2>Beacnox</h2>
+    <% end %>
+
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <%= link_to 'Dashboard', beacnox.beacnox_url, class: "navbar-item #{active?(:dashboard)}" %>
+      <%= link_to 'Requests Analysis', beacnox.beacnox_requests_url, class: "navbar-item #{active?(:requests)}" %>
+      <%= link_to 'Recent Requests', beacnox.beacnox_recent_url, class: "navbar-item #{active?(:recent)}" %>
+      <% if Beacnox._resource_monitor_enabled %>
+        <%= link_to 'System', beacnox.beacnox_resources_url, class: "navbar-item #{active?(:resources)}" %>
+      <% end %>
+      <%= link_to 'Slow Requests', beacnox.beacnox_slow_url, class: "navbar-item #{active?(:slow)}" %>
+      <%= link_to '500 Errors', beacnox.beacnox_crashes_url, class: "navbar-item #{active?(:crashes)}" %>
+      <% if defined?(Sidekiq) %>
+        <%= link_to 'Sidekiq', beacnox.beacnox_sidekiq_url, class: "navbar-item #{active?(:sidekiq)}" %>
+      <% end %>
+      <% if defined?(Delayed::Job) %>
+        <%= link_to 'Delayed::Job', beacnox.beacnox_delayed_job_url, class: "navbar-item #{active?(:delayed_job)}" %>
+      <% end %>
+      <% if defined?(Grape) %>
+        <%= link_to 'Grape', beacnox.beacnox_grape_url, class: "navbar-item #{active?(:grape)}" %>
+      <% end %>
+      <% if Beacnox.include_rake_tasks %>
+        <%= link_to 'Rake', beacnox.beacnox_rake_url, class: "navbar-item #{active?(:rake)}" %>
+      <% end %>
+      <% if Beacnox.include_custom_events %>
+        <%= link_to 'Custom Events', beacnox.beacnox_custom_url, class: "navbar-item #{active?(:custom)}" %>
+      <% end %>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <%= link_to Beacnox.home_link, class: "button is-light home_icon" do %>
+            <%= icon('home') %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

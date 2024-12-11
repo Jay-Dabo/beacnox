@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.authors = ["Jeffrey Dabo"]
   spec.email = ["jeffrey.dabo@purplewave.com"]
 
-  spec.summary = "Simple Rails Performance monitor. Alternative to the NewRelic, Datadog or other services."
+  spec.summary = "Simple Beacnox monitor. Alternative to the NewRelic, Datadog or other services."
   spec.description = "3rd party dependency-free solution how to monitor performance of your Rails applications."
   spec.homepage = "https://github.com/Jay-Dabo/beacnox"
   spec.license = "MIT"

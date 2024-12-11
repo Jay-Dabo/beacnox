@@ -1,0 +1,8 @@
+Description:
+    Generates initial config for beacnox gem
+
+Example:
+    bin/rails generate beacnox:install
+
+    This will create:
+        config/initializers/beacnox.rb

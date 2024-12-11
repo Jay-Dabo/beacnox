@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html class="theme-light">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Beacnox</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag if ::Rails::VERSION::STRING.to_f >= 5.2 %>
+    <%= render '/beacnox/stylesheets/stylesheets' %>
+    <link rel="shortcut icon" href="/favicon.ico">
+  </head>
+
+  <body class="has-sticky-footer">
+    <div class="loader-wrapper">
+        <div class="loader is-loading"></div>
+    </div>
+
+    <div class="main-content">
+      <section class="section">
+        <div class="container is-fluid is-size-7">
+          <%= render '/beacnox/shared/header' %>
+          <%= yield %>
+        </div>
+      </section>
+    </div>
+
+    <footer class="footer footer-box">
+      <div class="container is-fluid is-size-7">
+        © Beacnox <span class='red'><i class="fas fa-heart"></i></span> Jeffrey M. Dabo
+        <div class="is-pulled-right">v.<%= Beacnox::VERSION %></div>
+      </div>
+    </footer>
+
+    <%= render '/beacnox/panel' %>
+
+    <div class="panel-overlay"></div>
+
+    <%= render '/beacnox/javascripts/javascripts' %>
+
+    <%= yield :on_load %>
+  </body>
+
+</html>

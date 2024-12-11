@@ -1,0 +1,33 @@
+module Beacnox
+  module Gems
+    class GrapeExt
+      def self.init
+        ActiveSupport::Notifications.subscribe(/grape/) do |name, start, finish, id, payload|
+          # TODO change to set
+          CurrentRequest.current.ignore.add(:performance)
+
+          now = Beacnox::Utils.time
+          CurrentRequest.current.data ||= {}
+          CurrentRequest.current.record ||= Beacnox::Models::GrapeRecord.new(request_id: CurrentRequest.current.request_id)
+          CurrentRequest.current.record.datetimei ||= now.to_i
+          CurrentRequest.current.record.datetime ||= now.strftime(Beacnox::FORMAT)
+
+          if ["endpoint_render.grape", "endpoint_run.grape", "format_response.grape"].include?(name)
+            CurrentRequest.current.record.send(name.tr(".", "_") + "=", (finish - start) * 1000)
+          end
+
+          if payload[:env]
+            CurrentRequest.current.record.status = payload[:env]["api.endpoint"].status
+            CurrentRequest.current.record.format = payload[:env]["api.format"]
+            CurrentRequest.current.record.method = payload[:env]["REQUEST_METHOD"]
+            CurrentRequest.current.record.path = payload[:env]["PATH_INFO"]
+          end
+
+          if name == "format_response.grape"
+            CurrentRequest.current.record.save
+          end
+        end
+      end
+    end
+  end
+end

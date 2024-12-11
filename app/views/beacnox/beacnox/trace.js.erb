@@ -1,0 +1,9 @@
+<% if @record %>
+  window.panel.header.html(window.panel.close + "<%= j report_name(@record.record_hash.with_indifferent_access.except(*Beacnox.ignore_trace_headers)) %>");
+<% else %>
+  window.panel.header.html(window.panel.close);
+<% end %>
+
+window.panel.content.html("<%= j render '/beacnox/beacnox/trace' %>");
+
+showPanel();
